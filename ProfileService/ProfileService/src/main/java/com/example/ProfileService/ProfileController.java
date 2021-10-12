@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class ProfileController {
 	private Logger logger = LoggerFactory.getLogger(ProfileController.class);
 	
 	@GetMapping("/PS/profiles")
+	@CrossOrigin
 	public Collection<Profile>profiles(){
 		logger.trace("GET /PS/profiles");
 		return profiles.values();
@@ -38,6 +40,7 @@ public class ProfileController {
 	
 
 	@PutMapping("/PS/profiles")
+	@CrossOrigin
 	public Profile profiles_put(@RequestBody @Valid Profile profile) {
 		logger.trace("PUT /PS/profiles");
 		if (emails.contains(profile.getEmail()))
@@ -52,15 +55,18 @@ public class ProfileController {
 	}
 	
 	@DeleteMapping("/PS/profiles/{id}")
+	@CrossOrigin
 	public void profiles_delete(@PathVariable(value = "id") Long id) {
 		logger.trace("DELETE /PS/profiles/{id}");
 		Profile profile = profiles.get(id);
 		emails.remove(profile.getEmail());
 		profiles.remove(id);
+		logger.info(String.format("Profile deleted : [%d] %s.", profile.getId(),profile.getName(), profile.getEmail()));
 	}
 	
 	//PUT /PS/profiles/{id}/name
 	@PutMapping("/PS/profiles/{id}/name")
+	@CrossOrigin
 	public void update_name(@PathVariable(value="id")Long id, @RequestBody @Valid String name) {
 		logger.trace("PUT /PS/profiles/{id}/name");
 		Profile profile = profiles.get(id);
@@ -68,6 +74,7 @@ public class ProfileController {
 	}
 	
 	@GetMapping("/PS/profiles/{id}/name")
+	@CrossOrigin
 	public String profile_get_name(@PathVariable(value = "id") Long id){
 		logger.trace("GET /PS/profiles/{id}/name");
 		if (!profiles.containsKey(id))
@@ -76,6 +83,7 @@ public class ProfileController {
 	}
 	
 	@GetMapping("/PS/profiles/{id}/email")
+	@CrossOrigin
 	public String profile_get_email(@PathVariable(value = "id") Long id){
 		logger.trace("GET /PS/profiles/{id}/email");
 		if (!profiles.containsKey(id))
@@ -84,6 +92,7 @@ public class ProfileController {
 	}
 	
 	@GetMapping("/PS/profiles/{id}/description")
+	@CrossOrigin
 	public String profile_get_description(@PathVariable(value = "id") Long id){
 		logger.trace("GET /PS/profiles/{id}/description");
 		if (!profiles.containsKey(id))
