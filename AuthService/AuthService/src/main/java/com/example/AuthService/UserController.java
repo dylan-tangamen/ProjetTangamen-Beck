@@ -20,17 +20,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
+
+
 @RestController
 public class UserController {
 
 	private final Map<Long, User> users = new HashMap<>();
 	
+	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
-	@GetMapping("/AS/user/{userId}")
+	@GetMapping("/AS/users/{userId}")
 	@CrossOrigin
-	public User users_get(@RequestBody @Valid User user) {
+	public long users_get(@RequestBody @Valid User user) {
 		users.get(user.getId());
-		return user;
+		return user.getId();
 	}
 	
 	@PutMapping("/AS/users")
