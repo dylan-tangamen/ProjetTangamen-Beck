@@ -28,9 +28,9 @@ public class UserController {
 	
 	@GetMapping("/AS/user/{userId}")
 	@CrossOrigin
-	public User users_get(@RequestBody @Valid User user) {
+	public long users_get_id(@RequestBody @Valid User user) {
 		users.get(user.getId());
-		return user;
+		return user.getId();
 	}
 	
 	@PutMapping("/AS/users")
