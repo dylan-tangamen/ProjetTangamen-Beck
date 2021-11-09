@@ -16,26 +16,20 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 
 
-
+@RestController
 public class UserController {
 
-	private final AtomicLong counter = new AtomicLong();
 	private final Map<Long, User> users = new HashMap<>();
 	
-	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@PutMapping("/AS/users")
 	@CrossOrigin
 	public User users_put(@RequestBody @Valid User user) {
-		logger.trace("PUT /AS/users");
-		String password = user.getPassword();
-		long new_id = counter.incrementAndGet();
-		user.setId(new_id);
-		users.put(new_id, user);
-		logger.info(String.format("User created : [%d] %s.", new_id, user.getPassword()));
+		users.put(user.getId(), user);
 		return user;
 	}
 		

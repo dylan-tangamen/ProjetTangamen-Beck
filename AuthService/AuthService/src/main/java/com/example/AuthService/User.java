@@ -5,6 +5,12 @@ public class User {
 	private long id; 
 	private String password;
 	
+	public User(long id, String password) {
+		super();
+		this.id = id;
+		this.password = password;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -18,13 +24,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public User(long id, String password) {
-		super();
-		this.id = id;
-		this.password = password;
-	}
-	
-	 
 	
 	
 }
