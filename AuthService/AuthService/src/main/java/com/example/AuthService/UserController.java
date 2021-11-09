@@ -26,12 +26,21 @@ public class UserController {
 	private final Map<Long, User> users = new HashMap<>();
 	
 	
+	@GetMapping("/AS/user/{userId}")
+	@CrossOrigin
+	public User users_get(@RequestBody @Valid User user) {
+		users.get(user.getId());
+		return user;
+	}
+	
 	@PutMapping("/AS/users")
 	@CrossOrigin
 	public User users_put(@RequestBody @Valid User user) {
 		users.put(user.getId(), user);
 		return user;
 	}
+	
+	
 		
 	
 }
