@@ -47,7 +47,7 @@ public class UserController {
 	
 	@DeleteMapping("/AS/users/{userId}")
 	@CrossOrigin 
-	public void user_delete(@RequestBody @Valid User user) {
+	public void user_delete(@PathVariable(value = "id") @Valid User user) {
 		users.remove(user.getId(), user);
 		
 	}
