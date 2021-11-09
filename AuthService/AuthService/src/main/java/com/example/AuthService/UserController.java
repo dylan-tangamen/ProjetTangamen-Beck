@@ -21,23 +21,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
-
-
 @RestController
 public class UserController {
 
 	private final Map<Long, User> users = new HashMap<>();
+	private final Set<String> passwords = new HashSet<>();
 	
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
-	
-	@DeleteMapping("/AS/users/{userId}")
-	@CrossOrigin 
-	public void user_delete(@PathVariable(value = "id") Long id) {
-		users.remove(id);	
-	}
-	
+
 	
 	@GetMapping("/AS/users/{userId}")
 	@CrossOrigin
@@ -51,6 +43,15 @@ public class UserController {
 	public User users_put(@RequestBody @Valid User user) {
 		users.put(user.getId(), user);
 		return user;
+	}
+	
+	@DeleteMapping("/AS/users/{userId}")
+	@CrossOrigin 
+	public void user_delete(@PathVariable(value = "id") Long id) {
+		User user = users.get(id);
+		passwords.remove(user.getPassword());
+		users.remove(id);
+		
 	}
 	
 	
