@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ProfileService.Profile;
+
 
 @RestController
 public class UserController {
@@ -47,8 +49,11 @@ public class UserController {
 	
 	@DeleteMapping("/AS/users/{userId}")
 	@CrossOrigin 
-	public void user_delete(@PathVariable(value = "id") @Valid User user) {
-		users.remove(user.getId(), user);
+	public void user_delete(@PathVariable(value = "id") Long id) {
+		logger.trace("DELETE /AS/users/{id}");
+		User user = users.get(id);
+		passwords.remove(user.getPassword());
+		users.remove(id);
 		
 	}
 	
