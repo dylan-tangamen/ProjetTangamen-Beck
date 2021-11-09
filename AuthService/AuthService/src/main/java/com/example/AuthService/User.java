@@ -18,6 +18,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public User(long id, String password) {
+		super();
+		this.id = id;
+		this.password = password;
+	}
 	
 	 
 	
