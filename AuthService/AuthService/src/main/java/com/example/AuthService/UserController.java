@@ -13,7 +13,9 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +31,14 @@ public class UserController {
 	
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
+	
+	@DeleteMapping("/AS/users/{userId}")
+	@CrossOrigin 
+	public void user_delete(@PathVariable(value = "id") Long id) {
+		users.remove(id);	
+	}
+	
+	
 	@GetMapping("/AS/users/{userId}")
 	@CrossOrigin
 	public long users_get_id(@RequestBody @Valid User user) {
@@ -42,6 +52,7 @@ public class UserController {
 		users.put(user.getId(), user);
 		return user;
 	}
+	
 	
 	
 		
