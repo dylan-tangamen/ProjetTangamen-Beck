@@ -8,7 +8,7 @@ public class AuthServiceUser {
 	public AuthServiceUser(long id) {
 		super();
 		this.id = id;
-		this.password = password;
+		this.password = "test";
 	}
 	
 	public long getId() {
