@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -34,6 +35,11 @@ public class ProfileController {
 	private final AtomicLong counter = new AtomicLong();
 	private final Map<Long, Profile> profiles = new HashMap<>();
 	private final Set<String> emails = new HashSet<>();
+	private final RestTemplate restTemplate;
+	
+	public ProfileController(RestTemplateBuilder restTemplateBuilder) {
+		restTemplate = restTemplateBuilder.build();
+	}
 	
 	private Logger logger = LoggerFactory.getLogger(ProfileController.class);
 	
