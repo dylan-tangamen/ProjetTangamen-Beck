@@ -33,6 +33,5 @@ class AuthServiceApplicationTests {
 		this.mockMvc.perform(get("/AS/users/{userId}")).andDo(print()).andExpect(status().isOk()).andExpect(content().json("[]"));
 	}
 
-	
 
 }
